@@ -95,7 +95,7 @@ export class PlaywrightCollector {
     let finalUrl = targetUrl;
 
     // --- 1. Desktop Audit ---
-    logger.updateSpinner(`Audytuję widok Desktop (1920x1080)...`);
+    logger.updateSpinner(`Auditing Desktop viewport (1920x1080)...`);
     const desktopContext = await this.browser.newContext({
       viewport: { width: 1920, height: 1080 },
       userAgent:
@@ -144,7 +144,7 @@ export class PlaywrightCollector {
     }
 
     // --- 2. Mobile Audit ---
-    logger.updateSpinner(`Audytuję widok Mobile (Pixel 7 emulacja)...`);
+    logger.updateSpinner(`Auditing Mobile viewport (Pixel 7 emulation)...`);
     const pixel7 = devices['Pixel 7'] || {
       viewport: { width: 412, height: 915 },
       userAgent:
