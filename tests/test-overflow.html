@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overflow Test</title>
+  <style>
+    body { margin: 0; padding: 16px; font-family: sans-serif; }
+    .bad-element {
+      width: 900px;
+      background: red;
+      color: white;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Overflow</h1>
+  <div class="bad-element" id="wide-banner">This element is 900px wide and causes horizontal overflow!</div>
+  <script>
+    console.error("Test console error from client script");
+  </script>
+</body>
+</html>
