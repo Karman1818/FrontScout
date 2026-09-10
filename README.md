@@ -130,26 +130,26 @@ Options:
 ### Example Terminal Output
 
 ```text
-🔍 FrontScout CLI v0.1.0 | Uruchamianie audytu technicznego dla: https://example.com
-✔ Katalog sesji gotowy: output/example.com_2026-09-10T09-15-02-189Z
-✔ Pomyślnie zebrano dane techniczne i zrzuty ekranu!
+🔍 FrontScout CLI v0.1.0 | Running technical audit for: https://example.com
+✔ Session directory ready: output/example.com_2026-09-10T09-31-08-911Z
+✔ Technical data and screenshots captured successfully!
 
-=== Podsumowanie audytu technicznego FrontScout ===
-  • Badany adres URL: https://example.com
-  • Docelowy adres URL: https://example.com/
-  • Czas wykonania: 5.29s
-  • Błędy konsoli (console.error): 0
-  • Nieobsłużone wyjątki JS (pageerror): 0
-  • Błędy sieciowe HTTP (>= 400): 0
-  • Mobile Horizontal Scroll: NIE (layout poprawny)
+=== FrontScout Technical Audit Summary ===
+  • Target URL: https://example.com
+  • Final URL: https://example.com/
+  • Execution time: 3.25s
+  • Console errors (console.error): 0
+  • Unhandled JS exceptions (pageerror): 0
+  • HTTP network errors (>= 400): 0
+  • Mobile Horizontal Scroll: NO (clean layout)
 
-Wygenerowane zrzuty ekranu:
+Captured screenshots:
   • Desktop Viewport:   output/example.com_.../screenshots/desktop-fold.png
   • Desktop FullPage:   output/example.com_.../screenshots/desktop-full.png
   • Mobile Viewport:    output/example.com_.../screenshots/mobile-fold.png
   • Mobile FullPage:    output/example.com_.../screenshots/mobile-full.png
 
-✔ Zapisano surowe dane audytu w: output/example.com_.../technical-audit.json
+✔ Saved raw audit data to: output/example.com_.../technical-audit.json
 ```
 
 ---
