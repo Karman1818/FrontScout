@@ -202,14 +202,6 @@ output/
 
 ---
 
-## 🗺️ Roadmap
-
-- [x] **Phase 1**: Headless Playwright data collection (HTTP errors, console logs, layout overflow, screenshots).
-- [ ] **Phase 2**: Multimodal Vision LLM integration (GPT-4o & Claude 3.5 Sonnet analysis of visual defects, contrast, CTA placement).
-- [ ] **Phase 3**: Automated Markdown & JSON report generation featuring Top 3 critical bugs with CSS/JS fix snippets.
-- [ ] **Phase 4**: Cold outreach email generator drafting bespoke 2-3 sentence icebreakers for agency leads.
-
----
 
 ## 📄 License
 
