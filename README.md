@@ -209,28 +209,28 @@ output/
 
 ---
 
-## 🛠️ Jak to zbudowałem (Engineering & AI Collaboration)
+## 🛠️ How I Built It (Engineering & AI Collaboration)
 
-> *Sekcja dla rekruterów i zespołów technicznych: transparentne spojrzenie na proces powstawania projektu, synergię narzędzi AI z inżynierską weryfikacją oraz decyzje architektoniczne.*
+> *Recruiter & Technical Deep-Dive: A transparent breakdown of the development process, balancing AI-assisted acceleration with hands-on systems engineering, architecture, and manual verification.*
 
-### 1. Wykorzystane narzędzia AI
-* **Claude 3.5 Sonnet / Gemini 2.5**: Wykorzystane do przyspieszenia tworzenia szkieletu typów TypeScript (\src/types/\) oraz prototypowania promptu analitycznego.
-* **Google Gemini Multimodal Vision (\@google/genai\ - \gemini-2.5-flash\)**: Główny silnik analityczny działający wewnątrz aplikacji, który łączy telemetrię przeglądarki ze zrzutami ekranu powyżej linii zagięcia (*above-the-fold*), identyfikując wąskie gardła konwersji (CRO) i UX.
+### 1. AI Tooling Utilized
+* **Claude 3.5 Sonnet / Gemini 2.5**: Accelerated initial boilerplate scaffolding, TypeScript interfaces (\src/types/\), and prompt architecture prototyping.
+* **Google Gemini Multimodal Vision (\@google/genai\ - \gemini-2.5-flash\)**: The core analytical engine driving the runtime audit, correlating headless browser telemetry with above-the-fold screenshots to diagnose CRO bottlenecks and frontend defects.
 
-### 2. Co wymagało ręcznej poprawki i wiedzy inżynierskiej:
-* **Precyzyjna detekcja wycieków horyzontalnych (Horizontal Scroll Leak)**:
-  * *Problem generacji AI:* Proste zapytania sugerowały sprawdzanie \document.body.scrollWidth > window.innerWidth\. W nowoczesnych aplikacjach Next.js / Tailwind z kontenerami \overflow-x: clip\ dawało to notoryczne fałszywe alarmy (*false positives*) lub pomijało faktycznie ucięte elementy.
-  * *Rozwiązanie własne:* Zaimplementowałem dedykowany algorytm ewaluacyjny wstrzykiwany przez Playwright (\page.evaluate\), który rekurencyjnie bada wymiary geometryczne (\getBoundingClientRect\), analizuje właściwości CSS (\overflow\, \position\) każdego elementu potomnego i precyzyjnie lokalizuje selektor CSS elementu rozpychającego stronę.
-* **Hermetyzacja kontekstów i emulacji przeglądarki**:
-  * Zaprojektowałem niezależne, izolowane konteksty przeglądarki dla widoku desktopowego (\1920x1080\) oraz mobilnego (emulacja Pixel 7 z dotykiem i DPR 2.625), zapobiegając współdzieleniu ciasteczek i zanieczyszczaniu stanu sesji.
-* **Defensywna obsługa runtime i formatowanie raportów**:
-  * Odporność na strony z setkami błędów konsolowych i wyjątków JS – agregator filtruje i kategoryzuje błędy, zabezpieczając parsery przed awarią.
-* **Architektura Testów i CI**:
-  * Zaprojektowałem zestaw 10 testów jednostkowych i integracyjnych uruchamianych z natywnym runnerem \
-ode:test\ oraz skonfigurowałem potok GitHub Actions CI weryfikujący każdy commit i PR.
-
+### 2. Manual Engineering, Debugging & Custom Solutions:
+* **Accurate Horizontal Scroll & Viewport Leak Detection**:
+  * *The AI Limitation:* Naive LLM suggestions relied on standard checks like \document.body.scrollWidth > window.innerWidth\. In modern React/Next.js and Tailwind applications utilizing \overflow-x: clip\ or positioned layout containers, this produced recurring false positives or failed to catch clipped subtrees.
+  * *The Custom Solution:* Engineered a custom Playwright evaluation script (\page.evaluate\) that recursively inspects DOM subtree geometry (\getBoundingClientRect\), evaluates computed CSS layout properties (\overflow\, \position\), and computes the exact CSS selector of the offending element causing viewport distortion.
+* **Hermetic Browser Contexts & Multi-Device Emulation**:
+  * Architected isolated, ephemeral browser contexts separating Desktop (\1920x1080\) and Mobile (Pixel 7 emulation with simulated touch events and DPR 2.625), guaranteeing zero cookie leakage, clean cache boundaries, and authentic viewport rendering.
+* **Defensive Runtime Aggregation & Error Resilience**:
+  * Fortified against real-world websites throwing unhandled JavaScript exceptions and flooded network console logs. Designed an aggregator that categorizes runtime failures without crashing the reporting pipeline.
+* **Automated Testing Suite & CI/CD Pipeline**:
+  * Architected a 10-test automated suite using Node's native \
+ode:test\ runner and configured GitHub Actions CI to validate builds, linting, and tests on every commit and pull request.
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
 
 
