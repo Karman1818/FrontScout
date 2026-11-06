@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "audit": "tsx src/audit.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "tsx --test tests/audit.test.ts"
   },
   "keywords": [
     "audit",

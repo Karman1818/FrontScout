@@ -4,6 +4,8 @@
 
 **Autonomous Frontend & UX Audit Agent for High-Converting Cold Outreach**
 
+[![CI](https://github.com/Karman1818/FrontScout/actions/workflows/ci.yml/badge.svg)](https://github.com/Karman1818/FrontScout/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/Tests-10%20Passing-success.svg?style=for-the-badge)](tests/audit.test.ts)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-Headless-2EAD33.svg?style=for-the-badge&logo=playwright)](https://playwright.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933.svg?style=for-the-badge&logo=node.js)](https://nodejs.org/)
@@ -203,6 +205,32 @@ output/
 ---
 
 
+
+
+---
+
+## 🛠️ Jak to zbudowałem (Engineering & AI Collaboration)
+
+> *Sekcja dla rekruterów i zespołów technicznych: transparentne spojrzenie na proces powstawania projektu, synergię narzędzi AI z inżynierską weryfikacją oraz decyzje architektoniczne.*
+
+### 1. Wykorzystane narzędzia AI
+* **Claude 3.5 Sonnet / Gemini 2.5**: Wykorzystane do przyspieszenia tworzenia szkieletu typów TypeScript (\src/types/\) oraz prototypowania promptu analitycznego.
+* **Google Gemini Multimodal Vision (\@google/genai\ - \gemini-2.5-flash\)**: Główny silnik analityczny działający wewnątrz aplikacji, który łączy telemetrię przeglądarki ze zrzutami ekranu powyżej linii zagięcia (*above-the-fold*), identyfikując wąskie gardła konwersji (CRO) i UX.
+
+### 2. Co wymagało ręcznej poprawki i wiedzy inżynierskiej:
+* **Precyzyjna detekcja wycieków horyzontalnych (Horizontal Scroll Leak)**:
+  * *Problem generacji AI:* Proste zapytania sugerowały sprawdzanie \document.body.scrollWidth > window.innerWidth\. W nowoczesnych aplikacjach Next.js / Tailwind z kontenerami \overflow-x: clip\ dawało to notoryczne fałszywe alarmy (*false positives*) lub pomijało faktycznie ucięte elementy.
+  * *Rozwiązanie własne:* Zaimplementowałem dedykowany algorytm ewaluacyjny wstrzykiwany przez Playwright (\page.evaluate\), który rekurencyjnie bada wymiary geometryczne (\getBoundingClientRect\), analizuje właściwości CSS (\overflow\, \position\) każdego elementu potomnego i precyzyjnie lokalizuje selektor CSS elementu rozpychającego stronę.
+* **Hermetyzacja kontekstów i emulacji przeglądarki**:
+  * Zaprojektowałem niezależne, izolowane konteksty przeglądarki dla widoku desktopowego (\1920x1080\) oraz mobilnego (emulacja Pixel 7 z dotykiem i DPR 2.625), zapobiegając współdzieleniu ciasteczek i zanieczyszczaniu stanu sesji.
+* **Defensywna obsługa runtime i formatowanie raportów**:
+  * Odporność na strony z setkami błędów konsolowych i wyjątków JS – agregator filtruje i kategoryzuje błędy, zabezpieczając parsery przed awarią.
+* **Architektura Testów i CI**:
+  * Zaprojektowałem zestaw 10 testów jednostkowych i integracyjnych uruchamianych z natywnym runnerem \
+ode:test\ oraz skonfigurowałem potok GitHub Actions CI weryfikujący każdy commit i PR.
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
+

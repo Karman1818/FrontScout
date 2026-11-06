@@ -55,12 +55,12 @@ Copy and paste this personalized icebreaker into your cold outreach email:
 
 | Metric | Result |
 | :--- | :--- |
-| **Final URL** | \`${technicalData.finalUrl}\` |
-| **Audit Duration** | \`${(technicalData.durationMs / 1000).toFixed(2)}s\` |
-| **Mobile Horizontal Overflow** | ${mobLayout.hasHorizontalScroll ? `⚠️ **YES (+${mobLayout.overflowAmount}px)**` : '✅ Clean'} |
-| **Console Errors** | \`${technicalData.consoleErrors.length}\` |
-| **Failed HTTP Requests (>= 400)** | \`${technicalData.httpErrors.length}\` |
-| **Unhandled JS Exceptions** | \`${technicalData.pageExceptions.length}\` |
+| **Final URL** | \`${technicalData.finalUrl || technicalData.url}\` |
+| **Audit Duration** | \`${((technicalData.durationMs || 0) / 1000).toFixed(2)}s\` |
+| **Mobile Horizontal Overflow** | ${mobLayout?.hasHorizontalScroll ? `⚠️ **YES (+${mobLayout.overflowAmount}px)**` : '✅ Clean'} |
+| **Console Errors** | \`${technicalData.consoleErrors?.length || 0}\` |
+| **Failed HTTP Requests (>= 400)** | \`${technicalData.httpErrors?.length || 0}\` |
+| **Unhandled JS Exceptions** | \`${technicalData.pageExceptions?.length || 0}\` |
 
 ### 📸 Visual Evidence
 - [Desktop Above-The-Fold Screenshot](./screenshots/desktop-fold.png)
