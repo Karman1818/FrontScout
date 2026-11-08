@@ -2,4 +2,9 @@ node_modules/
 dist/
 output/
 .env
+.env.*
+!.env.example
 *.log
+.DS_Store
+.vscode/
+.idea/

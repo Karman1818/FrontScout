@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 640" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; rx: 12px; }
+      .bar { fill: #161b22; }
+      .dot-red { fill: #ff5f56; }
+      .dot-yellow { fill: #ffbd2e; }
+      .dot-green { fill: #27c93f; }
+      .title { fill: #8b949e; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; font-size: 13px; font-weight: 500; }
+      .text { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 13px; line-height: 1.45; }
+      .c-dim { fill: #6e7681; }
+      .c-white { fill: #f0f6fc; }
+      .c-purple { fill: #818cf8; font-weight: 700; }
+      .c-cyan { fill: #38bdf8; }
+      .c-green { fill: #34d399; }
+      .c-yellow { fill: #fbbf24; }
+      .c-red { fill: #f87171; font-weight: 600; }
+      .c-magenta { fill: #e879f9; }
+      .c-blue { fill: #60a5fa; }
+    </style>
+  </defs>
+
+  <!-- Terminal Window Background -->
+  <rect width="920" height="640" class="bg" />
+  
+  <!-- Window Header Bar -->
+  <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 908 0 C 914.63 0 920 5.37 920 12 L 920 40 L 0 40 Z" class="bar" />
+  <circle cx="24" cy="20" r="6" class="dot-red" />
+  <circle cx="44" cy="20" r="6" class="dot-yellow" />
+  <circle cx="64" cy="20" r="6" class="dot-green" />
+  <text x="460" y="24" text-anchor="middle" class="title">frontscout — bash — 920x640</text>
+
+  <!-- Terminal Content -->
+  <g transform="translate(28, 68)" class="text">
+    <!-- Prompt and Command -->
+    <text y="0">
+      <tspan class="c-green">karman@devbox</tspan><tspan class="c-dim">:</tspan><tspan class="c-blue">~/FrontScout</tspan><tspan class="c-white">$ npm run audit tests/test-overflow.html</tspan>
+    </text>
+
+    <!-- Header line -->
+    <text y="32">
+      <tspan class="c-purple">🔍 FrontScout CLI </tspan><tspan class="c-dim">v0.2.0 | Running technical audit for: </tspan><tspan class="c-cyan">tests/test-overflow.html</tspan>
+    </text>
+
+    <!-- Spinners finished -->
+    <text y="58">
+      <tspan class="c-green">✔ </tspan><tspan class="c-dim">Session directory ready: output/local_test-overflow_2026-11-08T19-41-32Z</tspan>
+    </text>
+    <text y="78">
+      <tspan class="c-green">✔ </tspan><tspan class="c-dim">Technical data and screenshots captured successfully! (Desktop 1920x1080 &amp; Pixel 7)</tspan>
+    </text>
+    <text y="98">
+      <tspan class="c-green">✔ </tspan><tspan class="c-dim">Vision analysis complete! Generated report.json and report.md</tspan>
+    </text>
+
+    <!-- Technical Summary -->
+    <text y="132" class="c-purple" font-weight="700">=== FrontScout Technical Audit Summary ===</text>
+    <text y="154"><tspan class="c-dim">  • Target URL:           </tspan><tspan class="c-cyan">file:///.../tests/test-overflow.html</tspan></text>
+    <text y="174"><tspan class="c-dim">  • Execution time:       </tspan><tspan class="c-white">2.38s</tspan></text>
+    <text y="194"><tspan class="c-dim">  • Console errors:       </tspan><tspan class="c-yellow">2 recorded</tspan></text>
+    <text y="214"><tspan class="c-dim">  • Mobile Scroll Leak:   </tspan><tspan class="c-red">⚠️ YES (overflow: +544px beyond Pixel 7 viewport)</tspan></text>
+    
+    <text y="240" class="c-yellow">  Elements causing horizontal overflow on mobile:</text>
+    <text y="260"><tspan class="c-dim">    - </tspan><tspan class="c-cyan">div#wide-banner</tspan><tspan class="c-dim"> (scrollWidth: 940px, viewportWidth: 412px)</tspan></text>
+
+    <!-- AI Vision Analysis -->
+    <text y="298" class="c-magenta" font-weight="700">=== AI Vision UX &amp; Conversion Analysis (gemini-2.5-flash) ===</text>
+    <text y="322" class="c-white">The site suffers from critical mobile viewport overflow (+544px) causing awkward</text>
+    <text y="342" class="c-white">lateral scroll and broken CTA conversion buttons for mobile users.</text>
+
+    <text y="374" class="c-red" font-weight="700">🚨 Top Critical Issues:</text>
+    <text y="396">
+      <tspan class="c-red">  #1</tspan><tspan class="c-white"> Severe Mobile Viewport Overflow Truncating Content </tspan><tspan class="c-dim">[LAYOUT | CRITICAL]</tspan>
+    </text>
+    <text y="416">
+      <tspan class="c-dim">     Fix snippet: </tspan><tspan class="c-cyan">#wide-banner { max-width: 100%; box-sizing: border-box; }</tspan>
+    </text>
+
+    <!-- Outreach Email -->
+    <text y="452" class="c-yellow" font-weight="700">✉️  Ready-to-Send Cold Outreach Pitch:</text>
+    <text y="474">
+      <tspan class="c-dim">  Subject: </tspan><tspan class="c-white">Quick question regarding mobile viewport overflow on your site</tspan>
+    </text>
+    <text y="494">
+      <tspan class="c-dim">  Body:    </tspan><tspan class="c-white">"While reviewing your site on mobile, I noticed a container causing a massive</tspan>
+    </text>
+    <text y="514">
+      <tspan class="c-white">           +544px horizontal overflow cutting off content. Resolving this responsive layout</tspan>
+    </text>
+    <text y="534">
+      <tspan class="c-white">           bug will instantly improve mobile usability and keep your visitors converting."</tspan>
+    </text>
+
+    <!-- Success Footer -->
+    <text y="570">
+      <tspan class="c-green">✔ Comprehensive report generated: </tspan><tspan class="c-cyan">output/local_test-overflow/report.md</tspan>
+    </text>
+  </g>
+</svg>

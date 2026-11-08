@@ -7,17 +7,10 @@ import { VisionAnalyzer } from './analyzers/vision.js';
 import { generateJsonReport } from './reporters/jsonReporter.js';
 import { generateMarkdownReport } from './reporters/markdownReporter.js';
 import { prepareAuditDirectory } from './utils/fileSystem.js';
+import { normalizeUrl } from './utils/url.js';
 import { logger } from './utils/logger.js';
 import { TechnicalAuditResult } from './types/audit.js';
 import { FinalAuditReport } from './types/report.js';
-
-function normalizeUrl(rawUrl: string): string {
-  let trimmed = rawUrl.trim();
-  if (!/^https?:\/\//i.test(trimmed) && !/^file:\/\//i.test(trimmed)) {
-    trimmed = `https://${trimmed}`;
-  }
-  return trimmed;
-}
 
 function printTechnicalSummary(result: TechnicalAuditResult): void {
   logger.header('FrontScout Technical Audit Summary');
