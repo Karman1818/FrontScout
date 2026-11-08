@@ -278,37 +278,30 @@ Continuous Integration is configured via [`.github/workflows/ci.yml`](.github/wo
 
 ---
 
-## 🛠️ How I Built It (Engineering & AI Collaboration)
+## 🛠️ How I Built It (AI Pair Programming & Architecture)
 
-> *Recruiter & Technical Deep-Dive: A transparent breakdown of the development process, balancing AI-assisted acceleration with hands-on systems engineering, architecture, and manual verification.*
+> *Recruiter & Technical Deep-Dive: A 100% transparent breakdown of building this project end-to-end via AI pair programming with Google Gemini, highlighting architectural steering, iterative feedback loops, and quality verification.*
 
-### 1. AI Tooling Utilized
-* **Cursor / Claude 3.5 Sonnet & Gemini 2.5 Pro**: Used for rapid architectural ideation, TypeScript interface boilerplate (`src/types/`), regex generation, and drafting preliminary prompt scaffolding.
-* **Google Gemini Multimodal Vision (`@google/genai` - `gemini-2.5-flash`)**: The core analytical engine driving the runtime audit, correlating headless browser telemetry with above-the-fold screenshots to diagnose CRO bottlenecks and frontend defects.
+### 🤖 1. The Tooling: Pair Programming with Gemini
+* **Google Gemini (Gemini 3.8 / High)**: The entire project was developed in close pair programming collaboration with Google Gemini. Rather than hand-typing boilerplate, my role was that of an **AI System Architect & Technical Director** — defining the problem domain, structuring the pipeline, and iteratively guiding the model through prompt design, code generation, and debugging sessions.
+* **Google Gemini Multimodal Vision API (`@google/genai` - `gemini-2.5-flash`)**: Integrated directly into the runtime CLI application to visually evaluate headless screenshots alongside technical telemetry, turning raw logs into CRO conversion audits and targeted cold outreach copy.
 
-### 2. What I Engineered & Manually Refactored After AI:
+### 🧭 2. My Role: Architectural Steering & Feedback Loops
+Effective AI-driven development isn't about blind copy-pasting; it requires deep domain understanding, active architectural steering, and rigorous verification:
 
-While LLMs are fantastic for boilerplate generation, building a production-grade CLI agent required extensive hands-on debugging, manual refactoring, and custom engineering:
+1. **Defining the Technical Domain & Edge Cases**:
+   * Directed Gemini to move beyond naive checks (`scrollWidth > innerWidth`), guiding it to evaluate actual rendered DOM geometry (`getBoundingClientRect`), computed styles (`overflow`, `position`, `display`), and compute the exact CSS selectors causing mobile horizontal scroll distortion.
+2. **Context Isolation & Dual-Device Emulation**:
+   * Instructed the model to architect separate, ephemeral browser contexts for Desktop (`1920x1080`) and Mobile (`Pixel 7`), preventing cookie/cache bleed and ensuring authentic touch and DPR emulation.
+3. **Prompt Engineering & Anti-Hallucination Guardrails**:
+   * Constrained the Vision LLM with strict JSON schemas (`responseMimeType: 'application/json'`), anchoring the analysis in verified Playwright telemetry so every detected issue contains business impact, technical proof, and runnable CSS/JS code fixes.
+4. **Resilience & Graceful Degradation**:
+   * Steered the CLI architecture to fail-safe defaults — third-party script crashes or missing API keys never crash the pipeline; technical audits are always captured and saved.
+5. **Automated Verification & CI**:
+   * Directed the creation of a zero-external-dependency automated test suite (10 hermetic tests in Node's native `node:test` runner) and GitHub Actions CI matrix to continuously verify build and runtime health on every push.
 
-#### 📐 A. Accurate Horizontal Scroll & Viewport Leak Detection (`src/collectors/layout.ts`)
-* **The AI Limitation:** Initial LLM suggestions relied on naive standard checks like `document.body.scrollWidth > window.innerWidth`. In modern React, Next.js, and Tailwind applications utilizing `overflow-x: clip`, sticky navigation, or positioned containers, this produced recurring false positives or completely missed clipped subtrees.
-* **The Custom Solution:** Engineered a custom Playwright evaluation script (`page.evaluate`) that recursively inspects DOM subtree geometry (`getBoundingClientRect`), evaluates computed CSS layout properties (`overflow`, `position`, `visibility`, `display`), compares `visualViewport` vs `clientWidth`, and computes the exact CSS selector of the offending element causing viewport distortion.
-
-#### 🌐 B. Hermetic Browser Contexts & Multi-Device Emulation (`src/collectors/playwright.ts`)
-* **The AI Limitation:** AI prototypes created a single shared browser context for both Desktop and Mobile passes. This resulted in state pollution, shared cookies, session storage leakage, and cache artifacts distorting mobile screenshots.
-* **The Custom Solution:** Architected isolated, ephemeral browser contexts separating Desktop (`1920x1080`) and Mobile (Pixel 7 emulation with simulated touch events, DPR 2.625, and isolated cookies/cache), guaranteeing clean cache boundaries, zero state leakage, and authentic viewport rendering.
-
-#### 🎯 C. Multimodal Vision Prompt Conditioning & Anti-Hallucination Guardrails (`src/analyzers/`)
-* **The AI Limitation:** Early unconstrained LLM prompts yielded generic, generic SEO fluff ("add alt text to your images", "improve contrast").
-* **The Custom Solution:** Implemented strict JSON schema enforcement (`responseMimeType: 'application/json'`) and conditioned the LLM prompt directly on verified Playwright telemetry (exact culprit CSS selectors, overflow pixel counts, console logs, and HTTP error codes). The LLM is strictly constrained to output concrete business CRO impact, technical proof, and runnable CSS/JS code fixes.
-
-#### 🛡️ D. Defensive Runtime Resilience & Graceful Degradation (`src/audit.ts`)
-* **The AI Limitation:** Naive code paths crashed the entire process whenever a target website emitted unexpected runtime exceptions or when the LLM API experienced rate limits.
-* **The Custom Solution:** Designed an error-resilient aggregator that categorizes runtime failures without crashing the reporting pipeline. If AI Vision analysis fails (or the user provides no API key), FrontScout gracefully falls back to technical Playwright diagnostics and saves `technical-audit.json`.
-
-#### ⚡ E. Zero-External-Dependency Fast Test Suite (`tests/audit.test.ts`)
-* **The AI Limitation:** AI suggested end-to-end integration tests that launched full browser instances inside CI for every test case, requiring 500MB browser downloads and causing flakiness in cloud runners.
-* **The Custom Solution:** Architected a 10-test suite leveraging Node's native `node:test` runner with mock telemetry and hermetic file fixtures, running in **< 100ms** and eliminating browser download overhead in GitHub Actions.
+### 💡 3. The Takeaway: AI-Native Engineering
+This project reflects modern software development: leveraging state-of-the-art AI pair programming for velocity, while taking full ownership of system architecture, prompt precision, and automated testing to deliver a production-ready developer tool.
 
 ---
 
