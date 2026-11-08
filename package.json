@@ -1,6 +1,6 @@
 {
   "name": "frontscout",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Autonomous website frontend & visual audit CLI tool for cold outreach",
   "main": "src/audit.ts",
   "type": "module",
