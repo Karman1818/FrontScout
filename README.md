@@ -15,9 +15,9 @@
   <b>FrontScout</b> crawls target websites, catches runtime frontend glitches, identifies mobile layout overflows, captures high-res viewport proofs, and preps technical intelligence for Multimodal Vision LLMs to craft personalized outreach pitches.
 </p>
 
-<!-- Terminal Demo -->
+<!-- Terminal Demo GIF -->
 <p align="center">
-  <img src="assets/terminal-demo.svg" alt="FrontScout Terminal Demo" width="820" />
+  <img src="assets/FrontScout1.gif" alt="FrontScout Terminal Demo" width="820" />
 </p>
 
 </div>
